@@ -10,7 +10,8 @@ const config = {
   tagline: 'Get your next Certification',
   url: 'https://getcert.org',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'ignore',
+//  onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 

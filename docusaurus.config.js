@@ -138,7 +138,7 @@ const config = {
         //    ],
         //  },
         ],
-        copyright: `Sharing knowled  ${new Date().getFullYear()}.`,
+        copyright: `KISS |•~| ${new Date().getFullYear()}.`,
       },
       prism: {
         theme: lightCodeTheme,

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[829],{1980:e=>{e.exports=JSON.parse('{"label":"partial","permalink":"/tags/partial","allTagsPath":"/tags","count":1,"items":[{"id":"701-100-lpic-devops/index","title":"Exam 701: DevOps Tools Engineer","description":"Exam Objetives Grid","permalink":"/701-100-lpic-devops/"}]}')}}]);

@@ -249,7 +249,8 @@ packer build -var 'ami_name=ami-<USERNAME>' -var 'base_ami=<AMI_ID>' -var 'vpc_i
 
 ``` shell
 # Create a new user called `ansible` and set the password.
-adduser ansible passwd ansible
+adduser ansible
+passwd ansible
 
 # Add the `ansible` user to the `sudoers` file and make sure that it can use `sudo` without a password.
 visudo
@@ -284,10 +285,113 @@ elinks
 
 #### Clone the Application from GitHub
 
-```
+```shell
+git clone https://github.com/linuxacademy/content-express-demo-app.git
 ```
 
 #### Build the Docker Image
 
+```dockerfile title="./dockerfile"
+FROM node
+
+RUN mkdir -p /var/node
+ADD content-express-demo-app/ /var/node
+WORKDIR /var/node
+RUN npm install
+
+CMD bin/www
 ```
+
+```shell
+docker build -t my/app-node:latest -f dockerfile .
 ```
+
+
+### Working with Docker Volumes
+
+#### Create a Dockerfile
+
+```dockerfile title="./dockerfile"
+FROM nginx
+VOLUME /usr/share/nginx/html
+VOLUME /var/log/nginx
+WORKDIR /usr/share/nginx/html
+```
+
+```shell
+# build
+docker build -t la/nextgen:latest -f Dockerfile  .
+```
+
+
+#### Create a volume for the HTML files
+
+```shell
+# Create a volume called `nginx-code`:
+docker volume create nginx-code
+```
+
+#### Create a volume for Nginx logs
+
+```shell
+# Create a second volume called `nginx-logs`:
+docker volume create nginx-logs
+```
+
+#### Create a Docker Container
+
+```shell
+# Create a container called next `nextgen-dev`
+docker run -d --name=nextgen-dev -p 80:80 --mount source=nginx-code,target=/usr/share/nginx/html --mount source=nginx-logs,target=/var/log/nginx la/nextgen:latest
+
+# Check out the volume:
+cd /var/lib/docker/volumes/
+ls
+
+#Change directory:
+cd nginx-code/_data/
+ls
+
+#Modify the HTML file:
+vi index.html
+```
+
+### Working with Docker Networks
+
+#### Create a Docker Network
+
+```shell
+# create
+docker network create app-bridge
+
+# list the network
+docker network ls
+```
+
+#### Create the Docker Container
+
+```shell
+# use the network
+docker run -dt --name my-app --network app-bridge nginx:latest
+```
+
+
+### Setting Up an Environment with Docker Compose
+
+#### Create a Docker-Compose File
+
+```yml title="./docker-compose.yml"
+
+
+
+```
+
+#### Run the Containers
+
+```shell
+# run 
+docker-compose up -d
+
+```
+
+

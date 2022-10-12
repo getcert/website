@@ -26,9 +26,11 @@ tags:
 
 ## Quiz Vagrant:
 
+## Quiz Packer:
+
 ---
 
-## Hands Vagrant:
+## Hands On Vagrant:
 
 ### Installing Vagrant on CentOS
 
@@ -40,7 +42,7 @@ yum -y install https://releases.hashicorp.com/vagrant/2.0.3/vagrant_2.0.3_x86_64
 
 #### Create a Vagrantfile
 
-```
+```ruby title="./vagranfile"
 Vagrant.configure("2") do |config|
     config.vm.provider "docker" do |d|
     d.image = "ghost:4.10.0"
@@ -51,7 +53,8 @@ end
 
 #### Deploy a Ghost Blog
 
-```
+```shell
+# startup
 vagrant up
 
 curl localhost
@@ -61,7 +64,7 @@ curl localhost
 
 #### Create a Dockerfile
 
-```yml
+```dockerfile title="./dockerfile"
 FROM node:alpine
 COPY code /code
 WORKDIR /code
@@ -72,7 +75,7 @@ CMD ["node", "app.js"]
 
 #### Create a Vagrantfile
 
-```yml
+```ruby title="./vagrantfile"
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
 Vagrant.configure("2") do |config|
   config.vm.provider "docker" do |d|
@@ -86,9 +89,11 @@ end
 
 #### Run Dev Environment
 
-```
+```shell
+# startup 
 vagrant up
 
+#make change and reload
 vagrant reload
 
 curl http://localhost
@@ -134,3 +139,31 @@ t('port') + '!'))
   "homepage": "https://github.com/rivethead42/hello-node#readme"
 }
 ```
+
+
+## Hands On Packer
+
+
+### Using Packer to Create an AMI
+
+#### Install Packer on the Cloud9 EC2 Instance
+
+```
+```
+
+#### Create a packer.json File
+
+```
+```
+
+#### Build an AMI Using packer.json
+
+```
+```
+
+#### Build an EC2 Instance Using the AMI
+
+```
+```
+
+

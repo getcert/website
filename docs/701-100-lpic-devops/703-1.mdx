@@ -148,22 +148,146 @@ t('port') + '!'))
 
 #### Install Packer on the Cloud9 EC2 Instance
 
-```
+```shell
+# 1.  In the Cloud9 terminal, become the `root` user:
+sudo su
+    
+# 2.  Change directory to `/usr/local/bin`:
+cd /usr/local/bin
+    
+# 3.  Download the Packer installer, replacing `<PACKER_LINK>` with the one you copied earlier: 
+wget <PACKER_LINK>
+    
+# 4.  Extract the file:
+unzip packer_1.5.5_linux_amd64.zip
+    
+# 5.  Remove the Packer ZIP file:
+rm packer_1.5.5_linux_amd64.zip
+    
+# 6.  Exit the `root` user session:
+exit
+    
+# 7.  Verify Packer works:
+packer --version
 ```
 
 #### Create a packer.json File
 
+```json title='./packer.json'
+{
+  "variables": {
+    "instance_size": "t2.small",
+    "ami_name": "ami-<USERNAME>",
+    "base_ami": "ami-1853ac65",
+    "ssh_username": "ec2-user",
+    "vpc_id": "",
+    "subnet_id": ""
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "us-east-1",
+      "source_ami": "{{user `base_ami`}}",
+      "instance_type": "{{user `instance_size`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_timeout": "20m",
+      "ami_name": "{{user `ami_name`}}",
+      "ssh_pty" : "true",
+      "vpc_id": "{{user `vpc_id`}}",
+      "subnet_id": "{{user `subnet_id`}}",
+      "tags": {
+        "Name": "App Name",
+        "BuiltBy": "Packer"
+      }
+    }
+  ],
+  "description": "AWS image",
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo yum update -y",
+        "sudo yum install -y git"
+      ]
+    }
+  ]
+}
 ```
+
+```shell
+# validate
+packer validate packer.json
 ```
 
 #### Build an AMI Using packer.json
 
-```
+```shell
+# change the <VALUES> that come from AWS
+packer build -var 'ami_name=ami-<USERNAME>' -var 'base_ami=<AMI_ID>' -var 'vpc_id=<VPC_ID>' -var 'subnet_id=<SUBNET_ID>' packer.json
 ```
 
 #### Build an EC2 Instance Using the AMI
 
+1.  Click **Launch**.
+2.  Check the box to select a **t2.small** instance type.
+3.  Click **Next: Configure Instance Details** > **Next: Add Storage** > **Next: Add Tags**.
+4.  Add a tag:
+    -   _Key_: **Name**
+    -   _Value_: **test-ami**
+5.  Click **Next: Configure Security Group** > **Review and Launch** > **Launch**.
+6.  Choose **Proceed without a key pair** and check the box to acknowledge.
+7.  Click **Launch Instances**.
+8.  On the next screen, you should see a green box saying "Your instances are now launching". Click the **instance ID** number provided next to the text "The following instance launches have been initiated:"
+9.  Watch your AMI progress to a "Running" instance state. You may need to click the refresh icon in the top-right to show the updated state.
+
+
+## Hands On Ansible
+
+### Exchange SSH Keys and Run Ansible Playbooks
+
+#### Create the SSH Keys for Exchanging between Master and Client Servers
+
+``` shell
+# Create a new user called `ansible` and set the password.
+adduser ansible passwd ansible
+
+# Add the `ansible` user to the `sudoers` file and make sure that it can use `sudo` without a password.
+visudo
+
+# While logged in as `ansible` user, create the necessary keys.
+ssh-keygen
+
+# Exchange the key with the remote client server.
+ssh-copy-id 10.0.1.101
+
+# Add the client to the Ansible host file.
+vi /etc/ansible/hosts
+
 ```
+
+#### Install the Elinks Package on the Remote Client Server
+
+``` shell
+# Run the playbook on the master.
+ansible-playbook /home/cloud_user/playbook.yml
+
+# Once the software is installed (it should show a success message), log in to the remote system and run the following:
+elinks
+
+# You should see an _About_ screen on your console.
 ```
 
 
+## Hands On Docker
+
+### Creating a Dockerfile
+
+#### Clone the Application from GitHub
+
+```
+```
+
+#### Build the Docker Image
+
+```
+```

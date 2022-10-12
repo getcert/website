@@ -1,0 +1,136 @@
+---
+sidebar_label: '703.1 Virtual Machine Deployment (weight: 4)'
+sidebar_position: 2
+tags:
+  - partial
+---
+
+## Key Knowledge Areas:
+
+### Understand Vagrant architecture and concepts, including storage and networking
+
+### Retrieve and use boxes from Atlas
+
+### Create and run Vagrantfiles
+
+### Access Vagrant virtual machines
+
+### Share and synchronize folder between a Vagrant virtual machine and the host system
+
+### Understand Vagrant provisioning, including File, Shell, Ansible and Docker
+
+### Understand multi-machine setup
+
+
+---
+
+## Quiz Vagrant:
+
+---
+
+## Hands Vagrant:
+
+### Installing Vagrant on CentOS
+
+#### Install Vagrant
+
+```shell
+yum -y install https://releases.hashicorp.com/vagrant/2.0.3/vagrant_2.0.3_x86_64.rpm
+```
+
+#### Create a Vagrantfile
+
+```
+Vagrant.configure("2") do |config|
+    config.vm.provider "docker" do |d|
+    d.image = "ghost:4.10.0"
+    d.ports = ["80:2368"]
+  end
+end
+```
+
+#### Deploy a Ghost Blog
+
+```
+vagrant up
+
+curl localhost
+```
+
+### Using Vagrant and Docker to Build a Dev Environment
+
+#### Create a Dockerfile
+
+```yml
+FROM node:alpine
+COPY code /code
+WORKDIR /code
+RUN npm install --production
+EXPOSE 3000
+CMD ["node", "app.js"]
+```
+
+#### Create a Vagrantfile
+
+```yml
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+Vagrant.configure("2") do |config|
+  config.vm.provider "docker" do |d|
+    #d.image = "ubuntu"
+    d.build_dir = "."
+    d.ports = ["80:3000"]
+  end
+  config.vm.synced_folder ".", "/vagrant"
+end
+```
+
+#### Run Dev Environment
+
+```
+vagrant up
+
+vagrant reload
+
+curl http://localhost
+```
+
+
+#### Extrafiles
+
+```js title="lab/app.js"
+const express = require('express')
+const app = express()
+
+app.get('/', (req, res) => res.send('Hello World!'))
+
+app.set('port', process.env.PORT || 3000)
+app.listen(app.get('port'), () => console.log('Example app listening on port ' + app.ge
+t('port') + '!'))
+```
+
+```json title="lab/package.json"
+{
+  "name": "hello-node",
+  "version": "1.0.0",
+  "description": "A simple NodeJS app.",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.4.17.1",
+    "package.json": "^2.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rivethead42/hello-node.git"
+  },
+  "author": "Travis N. Thomsen",
+  "license": "ISC",
+  "bugs": {    "url": "https://github.com/rivethead42/hello-node/issues"
+  },
+  "homepage": "https://github.com/rivethead42/hello-node#readme"
+}
+```

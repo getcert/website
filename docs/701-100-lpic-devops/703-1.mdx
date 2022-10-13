@@ -26,7 +26,336 @@ tags:
 
 ## Quiz Vagrant:
 
+> Which of the following commands will allow you to access the default Vagrant machine?
+> >  vagrant ssh default
+> >  ssh vagrant@localhost -p -i ~/.vagrant.d/insecure_private_key
+
+>Fill in the blank. The primary function of the _ _ _ _ _ _ _ _ _ is to describe the type of machine required for a project, and how to configure and provision these machines.
+>> Vagrantfile
+
+> When executing vagrant destroy, what flag would you use so that you are not prompted to confirm that you want to destroy the resources?
+> > -f
+
+> What command is used to start an environment defined in a Vagrantfile?
+> > vagrant up
+
+> When executing a vagrant init, what flag would you use to overwrite a Vagrantfile if one has already been created.
+> > -f
+
+> What are the three different components of a Box?
+> >A Box Information File
+> >A Box File
+> >A Box Catalog Metadata File
+
+> What file format should the info file be in?
+> > JSON
+
+> What happens when a metadata.json file is not present in a Vagrant Box?
+> >The Box can not be upgraded.
+
+> Which of these is true about Docker Base Boxes?
+> > The Docker provider does not require a Vagrant box.
+
+> When creating a base box, what are the default settings that should configured?
+> > Configure the SSH user to have passwordless sudo configured.
+> > Set the root password to vagrant.
+> > Create a vagrant user for SSH access to the machine.
+
+> Box Files are compressed using which of the following formats?
+> > zip
+> > tar.gz
+
+
 ## Quiz Packer:
+
+> What does cloud-init init do?
+> > Initializes cloud-init and performs initial modules.
+
+> Which Packer command is used to check the syntax and configuration of a template?
+> > packer validate
+
+> What is the job of the post-processors?
+> > Defines the various post-processing steps to take with the built images.
+
+> You are using User-Data to configure a cloud instances. How would you begin your script?
+> > #!
+
+> What is a builder and what does it do?
+> >A builder can be one or more component within a Packer template. Its responsibility is to build the type of machine image specified within a template.
+
+
+## Quiz Configuration Management:
+
+> How are Ansible playbooks expressed?
+> > Using YAML
+
+> What command would you run to list cookbooks on the Chef server?
+> > knife cookbook list
+
+> When using Ansible, what would you use to stores sensitive data such as passwords or keys in encrypted files?
+> > Ansible Vault
+
+> What is Idempotence?
+> > The property of certain operations in mathematics and computer science that they can be applied multiple times without changing the result beyond the initial application.
+
+> What does the ansible-config command do? Choose the best option.
+> > The ansible-config utility allows users to view and set configuration options and default settings. It also shows the origin of the current configuration values.
+
+
+## Quiz Docker and Kubernetes:
+
+> Which of these commands returns low-level information on Docker objects?
+> > docker inspect
+
+> Based off of the contents of the Dockerfile below, how many layers are created?
+> FROM ubuntu:15.04
+> RUN apt-get update -y && apt-get install git -y
+> COPY . /app
+> RUN make /app
+> CMD python /app/app.py
+> > Five layers are created.
+
+> Which of these best describes the Host network in Docker?
+> > The network that runs on the Docker host.
+
+> When creating a Dockerfile intended to be used for local image creation in the current directory, which of the following commands will build the file into an image and create it with the name 'myimage:v1'?
+> > docker build -t myimage:v1 .
+
+> Which of the following statements about Docker is NOT true?
+> > Docker relies on a software hypervisor
+
+> Which of these best describes Docker?
+> > A tool designed to make it easier to create, deploy, and run applications by using containers.
+
+> When using the --mount option, which of the following parameters would you use to indicate that the container should have access to the host filesystem?
+> > type=bind
+
+> How would you make a volume read only when using the mount flag?
+> > --mount source=nginx-vol,destination=/usr/share/nginx/html,readonly
+
+> What are the two ways to use volumes when creating a container?
+> > --mount
+> > -v
+
+> Which of these best describes Kubernetes?
+> > It is an open source container orchestration tool for containers.
+
+>What is a Kubernetes Pod?
+>> A Pod is a group of containers that are deployed together on the same host.
+
+
+## Quiz Docker Compose:
+
+> Which directive, when added to the docker-compose file, will allow you to map service ports to the underlying host?
+> > ports:
+
+> Which directive, when added to a service in a docker-compose file, allows a container to be able to access another container by it's service alias that is defined in the same compose file?
+> > links
+
+> Which optional directive when applied in any section of a docker-compose file, will allow you to add a 'name' or 'description' to that section?
+> > labels:
+
+> Which of the following Docker Compose commands would allow you to temporarily suspend a compose environment without stopping or killing it?
+> > docker-compose pause
+
+> Which 'language' are Docker Compose files generally written in?
+> YAML
+
+## Quiz Docker Swarm:
+
+>'Docker Swarm' provides what functionality to your management of Docker containers in a cluster
+>> Orchestration, Deployment and Service Management
+
+> If you want to make the container service on port 80 available to the underlying host(s) on the same port?
+> > --publish published=80,target=80
+> > -p 80:80
+
+> Docker Machine is typically installed on which OS platforms in order to run and manage containers?
+> > Windows
+> > Mac OS
+
+> If you would like to get the complete configuration of an active machine called 'mymachine', what command would show you that full list of information in JSON format?
+> > docker-machine inspect mymachine
+
+> Which of the following commands will allow you to create a service called 'myservice' with 5 replicas from the 'httpd' image?
+> > docker service create --name myservice --replicas=5 httpd
+
+> With an active machine called 'mytest', which Docker Machine command will show you the security configuration (keys and encryption info) of said machine?
+> > docker-machine config mytest
+
+> When working in Docker Machine environment, which command will show you the running machines you can work with?
+> > docker-machine active
+
+> In order to create a service in Docker Swarm that uses a particular named volume, which optional parameter would you add to the creation command in order to do so?
+> >--mount type=volume,destination=/path/in/container
+
+
+## Quiz Modern Software Development:
+
+> Which of the follow can be used to describe REST?
+> > They are stateless.
+
+> Which of the following best describes Monolith architecture?
+>> Deployments are all or nothing
+
+> What are some of the benefits of using a RESTful API?
+> > Multiple clients can consume the API.
+> > They are modular.
+
+> At the end of a sprint what should be delivered.
+> > A working piece of functionality.
+
+> What is the microservice architecture a variant of?
+> > Service Oriented Architecture
+
+> In Test Driven Development, what is the first thing a developer should do when starting a new project or a new piece of functionality?
+> > Write tests for the new functionality.
+
+> Which of these is not part of the Agile Manifesto?
+> > Business value is given more importance than technical strategy
+
+> Which of the following best describes Service Oriented Architectures?
+> > Standardized interface and protocol.
+
+
+## Quiz  Jenkins:
+
+> What is Continuous Integration?
+> > Frequent merging of code.
+
+> In Jenkins, what is an Artifact?
+> > An immutable file generated during a Build or Pipeline.
+
+> What does the Fingerprint Plugin do?
+> > Adds the ability to generate fingerprints as build steps instead of waiting for a build to complete.
+
+> What is Continuous Delivery?
+> > Always maintaining code in a deployable state.
+
+> How often should you be deploying to production with continuous deployment?
+> > There is no set standard.
+
+> Which Jenkins plugin allows you to output a XML report of your build?
+> > JUnit
+
+## Quiz Git :
+
+> In Git, once a repository is created on the command line, the user can begin creating files. Which of the following commands will allow you to check-in all new files created in a directory that ends with the extension .java?
+> > git add *.java
+
+> What command would you use to show the status of your working tree.
+> > git status
+
+> Which of the following commands will initialize a local, empty repository, in the current directory?
+> > git init
+
+>   When committing staged files in a repository, which of the following commands will allow you to commit those files while adding a comment for the entire commit at the same time?
+>   > git commit -m "These are the files I am checking into the repository"
+>   
+
+> You have been moved to a new development team. The lead developer sends you a link to the GitHub repo. What command would you use to clone the repository to your local system?
+> > git clone
+
+
+
+## Quiz Deploy Code To Production:
+
+
+> Which deployment strategy is Canary Deployment similar to?
+> > Blue-Green Deployment
+
+>Which of the following tools can be used to create images for Immutable Servers?
+>> Packer
+
+> Which of these is not a part of creating Immutable Servers?
+> > Use a manual deployment strategy.
+
+> Which of the following best describes servers managed by Configuration Management?
+> > Servers are persistent.
+> > Data can be stored locally.
+
+> Which steps should you follow in order to perform a Canary Deployment?
+> > 1.  All traffic is routed to the old version of the application.
+> > 2.  Most traffic is routed to the old version of the application and a segment of the user base is routed to the new version of the application.
+> > 3.  Once vetted all traffic is routed to the new version of the application.
+
+> Which of the following best describes Immutable Servers?
+> > Servers can be tested.
+> > Disposability
+
+
+
+## Quiz Standard Components and Platforms for Software:
+
+> What is a Content Delivery Network?
+> >A geographically distributed network of proxy servers.
+
+> Which of the following languages are supported in Cloud Foundry?
+> > All of the above
+
+> Which OpenStack components manages Database as a Service?
+> > Trove
+
+> Which OpenStack components is a multi-tenant cloud messaging and notification service?
+> > Zaqar
+
+> Which OpenStack components is responsible for managing object storage?
+> > Swift
+
+## Quiz Prometheus and Logstash:
+
+> What are the three event processing pipeline stages of Logstash?
+> >Filters
+> >Inputs
+> >Outputs
+
+> What format does the syslog input parse messages?
+> >RFC 3164
+
+> How does Prometheus store it’s data?
+> Time series
+
+> In Prometheus, every time series data has a ****_ and a __****.
+> > Labels
+> > Metric name
+
+> What is syntax in Grok?
+> > The name of the pattern that will match the text
+
+
+
+## Quiz Cross Site Scripting, ACID and CAP Theorem:
+
+> What is Injection Theory?
+> > When an attacker's attempt to send data to an application in a way that will change the meaning of commands being sent to an interpreter.
+
+> When using CORs headers, which of the following HTTP request methods do not need a Pre-flight request?
+> > POST
+> > GET
+
+> Which of the following apply to BASE?
+> > Eventual consistency
+
+> How can you stop a JavaScript from getting access to browser cookies?
+> > HttpOnly flag
+
+> Which of the following CORs headers indicates whether the response can be shared.
+> > Access-Control-Allow-Origin
+
+> What is CAP Theorem?
+> > It is impossible for a distributed data store to simultaneously provide more than two out of the three guarantees.
+
+> What are the three guarantees in CAP Theorem?
+> > Partition tolerance
+> > Availability
+> > Consistency
+
+> How do CSRF tokens work?
+> > A token is sent as a hidden field in the form and another is sent as a Set-Cookie in the header of the response. The two tokens are validated on the server.
+
+
+
+
 
 ---
 
@@ -381,8 +710,31 @@ docker run -dt --name my-app --network app-bridge nginx:latest
 #### Create a Docker-Compose File
 
 ```yml title="./docker-compose.yml"
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: R00tP4ssw0rd
+      MYSQL_DATABASE: app_name
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: 4pp_n4meP4sswrd0!
+  webapp:
+    image: php:7.0-apache
+    volumes:
+      - app_data:/var/www/html
+      - app_logs:/var/logs/apache2
+    restart: always
+    links:
+      - db
 
-
+volumes:
+    db_data:
+    app_data:
+    app_logs:
 
 ```
 
@@ -395,3 +747,270 @@ docker-compose up -d
 ```
 
 
+### Working with Docker Swarm
+
+#### Initialize your Master Node
+
+```shell
+# In the first terminal, initialize the swarm master
+docker swarm init
+
+# keep the join data safe
+```
+
+#### Register Your Node with the Swarm Master
+
+```shell
+# In the second terminal, paste the join data
+docker swarm join
+
+```
+
+#### Create the Service in Your Swarm
+
+```shell
+docker pull httpd
+
+docker service create --name our_api --replicas=2 httpd:latest
+```
+
+
+## Hands On Jenkins
+
+### Building a Docker Image using Packer and Jenkins
+
+#### Open port 8080 on firewalld.
+
+```shell
+# Open the firewall
+
+sudo firewall-cmd --zone=public --permanent --add-port=8080/tcp sudo firewall-cmd --reload
+
+# Check the firewall.
+sudo firewall-cmd --zone=public --permanent --list-ports
+```
+
+#### Create the Jenkins Packer build job.
+
+1.  On the Jenkins login screen, copy the admin password file path to your clipboard.
+2.  Switch to your terminal, and expand the contents of the file to get the password.
+
+`cat /var/lib/jenkins/secrets/initialAdminPassword`
+
+1.  Copy the output of this command to your clipboard.
+2.  Switch back to your web browser, and paste the admin password into the password field on the Jenkins login screen.
+3.  Click **Continue**.
+4.  On the *Getting Started* page, choose **Install suggested plugins**.
+5.  When the plugins have finished installing, click **Continue as admin**.
+6.  Click **Save and Finish**.
+7.  Click **Start using Jenkins**.
+8.  On the Jenkins dashboard screen, click **create new jobs**.
+9.  Under *Enter an item name*, type "BuildAppImage".
+10.  Select **Freestyle project**, and click **OK**.
+11.  Under the *General* tab, select **This project is parameterized**.
+12.  Click **Add Parameter** > **String Parameter**.
+13.  In the *String Parameter* menu, configure the following:
+    *   **Name:** repo\_name
+    *   **Default Value:** la/express
+14.  Click **Apply**.
+15.  Scroll down to the *Source Code Management* header, and select **Git**.
+16.  For *Repository URL*, enter the following: `https://github.com/linuxacademy/content-lpic-ot-701-packer-docker.git`
+17.  Scroll down the page to the *Build* header, and click **Add build step** > **Execute shell**.
+18.  In the *Command* box, enter the following:
+
+`/usr/local/bin/packer build -var "repository=${repo_name}" -var "tag=${BUILD_NUMBER}" packer.json`
+
+1.  Click **Save**.
+
+#### Run the build job.
+
+1.  On the project overview page, click **Build with Parameters**, then **Build**.
+2.  Under *Build History*, click **#1**.
+3.  Click **Console Output** in the left sidebar.
+4.  Switch to your terminal application.
+5.  Verify that the `la/express` and `node` images were successfully created. `docker images`
+
+
+## Hands On Logstash
+
+### Working with Logstash
+
+#### Install Elasticsearch
+
+*   Install Java:
+
+    `yum install java-1.8.0-openjdk -y`
+
+*   Import Elastic's GPG key:
+
+    `rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch`
+
+*   Add the Logstash repo:
+
+    `vi /etc/yum.repos.d/logstash.repo`
+
+*   Enter the repo information:
+
+    `[logstash-6.x] name=Elastic repository for 6.x packages baseurl=https://artifacts.elastic.co/packages/6.x/yum gpgcheck=1 gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch enabled=1 autorefresh=1 type=rpm-md`
+
+    Save and quit the file.
+
+*   Install Elasticsearch:
+
+    `yum install elasticsearch -y`
+
+*   Open the Elasticsearch configuration file:
+
+    `vim /etc/elasticsearch/elasticsearch.yml`
+
+*   Make the following changes:
+
+    *   Un-comment `node.name` and rename it to `master`.
+    *   Un-comment `network.host` and replace its IP with `"localhost"`.
+
+    Save and quit the file.
+
+*   Enable and start Elasticsearch:
+
+    `systemctl enable elasticsearch && systemctl start elasticsearch`
+
+#### Install Logstash
+
+1.  Install Logstash:
+
+    `yum install logstash -y`
+
+2.  Enable Logstash:
+
+    `systemctl enable logstash`
+
+3.  Create a `syslog.conf` file:
+
+    `vi /etc/logstash/conf.d/syslog.conf`
+
+4.  Enter the following into the file:
+
+```json title="/etc/logstash/conf.d/syslog.conf"
+input {
+  beats {
+    port => 5044
+    host => "0.0.0.0"
+  }
+}
+filter {
+  grok {
+      match => { "message" => "%{SYSLOGTIMESTAMP:syslog_timestamp} %{SYSLOGHOST:syslog_hostname} %{DATA:syslog_program}(?:\[%{POSINT:syslog_pid}\])?: %{GREEDYDATA:syslog_message}" }
+  add_field => [ "received_at", "%{@timestamp}" ]
+  add_field => [ "received_from", "%{host}" ]
+  }
+  syslog_pri { }
+  date {
+    match => [ "syslog_timestamp", "MMM d HH:mm:ss", "MMM dd HH:mm:ss" ]
+  }
+}
+output {
+  elasticsearch { hosts => localhost }
+  stdout { codec => rubydebug }
+}
+```
+
+5.  Start Logstash:
+
+    `systemctl start logstash`
+
+#### Install Kibana
+
+1.  Install Kibana:
+
+    `yum install kibana -y`
+
+2.  Enable and start Kibana:
+
+    `systemctl enable kibana systemctl start kibana`
+
+3.  Open a new terminal window that is *not* logged in to the lab environment. In the new window, set up a tunnel between your local system and the lab environment by logging in via SSH (using the public IP address listed on the lab page):
+
+    `ssh cloud_user@<PUBLIC IP ADDRESS> -L 5601:localhost:5601`
+
+4.  In a new browser tab, navigate to `localhost:5601`.
+
+5.  Once the Kibana site loads, close out of any welcome message you receive.
+
+6.  Click **Management** in the left-hand menu.
+
+7.  In the *Kibana* section, click **Index Patterns**.
+
+8.  Check to **Include system indices**.
+
+9.  In the *Index pattern* box, enter "logstash-\*".
+
+10.  Click **Next Step**.
+
+11.  In the *Time Filter field name* dropdown, select **@timestamp**.
+
+12.  Click **Create index pattern**.
+
+13.  Click **Discover** in the left-hand menu.
+
+14.  In the *Available Fields* menu, click **add** next to each of the following:
+
+    *   **syslog\_facility**
+    *   **syslog\_facility\_code**
+    *   **syslog\_hostname**
+    *   **syslog\_message**
+
+#### Install Filebeat and use the System Module
+
+*   Install Filebeat:
+
+    `yum install filebeat -y`
+
+*   Run the following:
+
+    `filebeat setup`
+
+    If you see a Kibana error, that's fine — it's because we don't yet have Kibana installed.
+
+*   Open the `filebeat.yml` file:
+
+    `vi /etc/filebeat/filebeat.yml`
+
+*   Edit the file:
+
+    *   In the `Elasticsearch output` section, comment out `#output.elasticsearch` and `# hosts`
+    *   In the `Logstash output` section, un-comment `output.logstash` and `hosts`.
+
+    Save and quit the file.
+
+*   Enable the syslog module:
+
+    `filebeat modules enable system`
+
+*   Start the Filebeat service:
+
+    `systemctl start filebeat`
+
+*   Restart Logstash:
+
+    `systemctl restart logstash`
+
+*   Ensure there aren't any errors in Logstash:
+
+    `tail -f /var/log/logstash/logstash-plain.log`
+
+    It should be fine. Hit **Ctrl**+**C** to end the process.
+
+
+#### Connect to Kibana and Explore the Data
+
+*   From your local machine, SSH with port forwarding to your cloud server's public IP:
+
+    `ssh user_name@public_ip -L 5601:localhost:5601`
+
+*   Navigate to `localhost:5601` in your web browser.
+
+*   Go to the **Dashboard** plugin via the side navigation bar.
+
+*   Search for **system** to filter to your system dashboards.
+
+*   Explore your system log data with the supplied dashboards.
